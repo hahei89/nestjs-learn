@@ -7,7 +7,12 @@ import { NewsController } from './news/news.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, ArticleController, UserController, NewsController],
+  controllers: [
+    AppController,
+    ArticleController,
+    UserController,
+    NewsController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}
