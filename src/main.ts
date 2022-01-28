@@ -4,7 +4,14 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 const listenPort = 3000;
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets('public'); //配置静态资源目录
+  //配置静态资源目录
+  app.useStaticAssets('public', {
+    prefix: 'static', // 设置虚拟路径
+  });
+  // 设置模板引擎
+  app.setBaseViewsDir('views');
+  app.setViewEngine('ejs');
+
   await app.listen(listenPort, () => {
     console.log('在3000端口启动');
   });
