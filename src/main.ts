@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import * as cookieParser from 'cookie-parser';
+
 const listenPort = 3000;
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -11,7 +13,8 @@ async function bootstrap() {
   // 设置模板引擎
   app.setBaseViewsDir('views');
   app.setViewEngine('ejs');
-
+  // 配置cookie中间件
+  app.use(cookieParser());
   await app.listen(listenPort, () => {
     console.log('在3000端口启动');
   });

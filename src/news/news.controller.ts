@@ -1,7 +1,10 @@
-import { Controller, Get, Param, Query } from '@nestjs/common'
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { NewsService } from './news.service';
 
 @Controller('news')
 export class NewsController {
+  // 依赖注入
+  constructor(private newsService: NewsService) {}
   @Get(':id')
   index(@Param() param) {
     console.log(param);
@@ -18,6 +21,6 @@ export class NewsController {
   @Get('a*d')
   add(@Query('id') id) {
     console.log(id);
-    return '模糊匹配';
+    return this.newsService.findAll();
   }
 }
