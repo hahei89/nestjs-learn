@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Request } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,12 +7,16 @@ export class AppController {
 
   @Get()
   @Render('default/index')
-  getHello(): Record<string, unknown> {
+  getHello(@Request() req): Record<string, unknown> {
+    // 设置session
+    req.session.username = '哈哈哈';
     return { name: '展示' };
   }
 
   @Get('news')
-  getNews(): string {
+  getNews(@Request() req): string {
+    console.log(req.session.username);
+
     return this.appService.getNews();
   }
 }

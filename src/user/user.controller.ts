@@ -25,4 +25,11 @@ export class UserController {
     console.log(body);
     return '创建数据';
   }
+
+  @Get('cookie')
+  getCookie(@Request() req) {
+    console.log(req.cookies.username);
+
+    return req.cookies.username;
+  }
 }

@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as cookieParser from 'cookie-parser';
+import * as session from 'express-session';
 
 const listenPort = 3000;
 async function bootstrap() {
@@ -15,6 +16,12 @@ async function bootstrap() {
   app.setViewEngine('ejs');
   // 配置cookie中间件
   app.use(cookieParser());
+  app.use(
+    session({
+      secret: 'keyboard cat',
+      cookie: { maxAge: 60000 },
+    }),
+  );
   await app.listen(listenPort, () => {
     console.log('在3000端口启动');
   });
