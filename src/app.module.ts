@@ -5,9 +5,10 @@ import { ArticleController } from './article/article.controller';
 import { UserController } from './user/user.controller';
 import { NewsController } from './news/news.controller';
 import { NewsService } from './news/news.service';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
-  imports: [],
+  imports: [CatsModule],
   controllers: [
     AppController,
     ArticleController,
